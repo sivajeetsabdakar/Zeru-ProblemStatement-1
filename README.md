@@ -26,7 +26,7 @@ graph TD;
     B --> C[Preprocessing: Scaling & Cleaning]
     C --> D[Clustering or Outlier Detection]
     D --> E[Score Calculation]
-    E --> F[Output CSV or JSON]
+    E --> F[Output CSV]
 ```
 
 - **Input:** JSON file with transaction records (wallet, action, amount, asset, timestamp, etc.)
@@ -34,7 +34,7 @@ graph TD;
 - **Preprocessing:** I handle missing values, normalize features, and apply time-decay if enabled
 - **Clustering/Outlier Detection:** I group wallets or flag outliers using the chosen method
 - **Score Calculation:** I combine features, anomaly/cluster info, volatility, and cluster reputation into a final score
-- **Output:** CSV/JSON with wallet scores, cluster labels, anomaly scores, and all features
+- **Output:** CSV with wallet scores, cluster labels, anomaly scores, and all features
 
 ---
 
