@@ -7,9 +7,9 @@ This project provides a robust, transparent pipeline to assign a credit score (0
 ## Methodology Overview
 
 ### Chosen Methods
-- **Unsupervised Learning:** No ground-truth labels are required. We use clustering and anomaly detection to group wallets by behavioral similarity and flag outliers.
+- **Unsupervised Learning:** No ground-truth labels are required. I use clustering and anomaly detection to group wallets by behavioral similarity and flag outliers.
 - **Multiple Algorithms:** The pipeline supports KMeans, DBSCAN, IsolationForest, Z-score, Mahalanobis distance, and Autoencoder-based anomaly detection. This flexibility allows for robust, extensible scoring.
-- **Feature Engineering:** We extract a rich set of features from raw transaction logs, including behavioral counts, value-based metrics, diversity, temporal activity, and volatility.
+- **Feature Engineering:** I extract a rich set of features from raw transaction logs, including behavioral counts, value-based metrics, diversity, temporal activity, and volatility.
 - **Scoring:** Scores are a weighted combination of normalized features, anomaly/cluster information, volatility, and cluster reputation, all mapped to a 0–1000 scale.
 
 ### Why Unsupervised?
@@ -23,17 +23,17 @@ This project provides a robust, transparent pipeline to assign a credit score (0
 ```mermaid
 graph TD;
     A[Input JSON: Raw Transactions] --> B[Feature Engineering]
-    B --> C[Preprocessing (Scaling, Cleaning)]
-    C --> D[Clustering/Outlier Detection]
+    B --> C[Preprocessing: Scaling & Cleaning]
+    C --> D[Clustering or Outlier Detection]
     D --> E[Score Calculation]
-    E --> F[Output CSV/JSON]
+    E --> F[Output CSV or JSON]
 ```
 
 - **Input:** JSON file with transaction records (wallet, action, amount, asset, timestamp, etc.)
-- **Feature Engineering:** Aggregates per-wallet features (counts, values, diversity, volatility, etc.)
-- **Preprocessing:** Handles missing values, normalizes features, applies time-decay if enabled
-- **Clustering/Outlier Detection:** Groups wallets or flags outliers using the chosen method
-- **Score Calculation:** Combines features, anomaly/cluster info, volatility, and cluster reputation into a final score
+- **Feature Engineering:** I aggregate per-wallet features (counts, values, diversity, volatility, etc.)
+- **Preprocessing:** I handle missing values, normalize features, and apply time-decay if enabled
+- **Clustering/Outlier Detection:** I group wallets or flag outliers using the chosen method
+- **Score Calculation:** I combine features, anomaly/cluster info, volatility, and cluster reputation into a final score
 - **Output:** CSV/JSON with wallet scores, cluster labels, anomaly scores, and all features
 
 ---
