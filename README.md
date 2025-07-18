@@ -69,12 +69,20 @@ graph TD;
 ### KMeans
 
 **Mathematical Background:**
-- KMeans partitions the feature space into \( k \) clusters by minimizing the within-cluster sum of squared Euclidean distances.
-- For \( n \) wallets (feature vectors \( x_i \)), and \( k \) centroids \( \mu_j \), the objective is:
-  \[
-  \min_{\{\mu_j\}} \sum_{i=1}^n \min_{j \in \{1,...,k\}} \|x_i - \mu_j\|^2
-  \]
-- In this pipeline, \( k = 4 \) by default.
+- KMeans partitions the feature space into k clusters by minimizing the within-cluster sum of squared Euclidean distances.
+- For n wallets (feature vectors x_i), and k centroids μ_j, the objective is:
+
+    Minimize over {μ_j}:
+        sum_{i=1}^n min_{j in {1,...,k}} ||x_i - μ_j||^2
+
+    Where:
+    - n = number of wallets
+    - k = number of clusters
+    - x_i = feature vector for wallet i
+    - μ_j = centroid of cluster j
+    - ||x_i - μ_j||^2 = squared Euclidean distance
+
+- In this pipeline, k = 4 by default.
 
 **Pipeline Steps:**
 1. **Feature Engineering:**  
@@ -138,8 +146,8 @@ graph TD;
 **Mathematical Background:**
 - DBSCAN (Density-Based Spatial Clustering of Applications with Noise) groups points that are closely packed together (points with many nearby neighbors), and marks as outliers points that lie alone in low-density regions.
 - Two main parameters:
-  - `eps`: Maximum distance between two samples for them to be considered as in the same neighborhood (default: 1.5 in code).
-  - `min_samples`: Minimum number of samples in a neighborhood for a point to be considered a core point (default: 5).
+    - eps: Maximum distance between two samples for them to be considered as in the same neighborhood (default: 1.5 in code).
+    - min_samples: Minimum number of samples in a neighborhood for a point to be considered a core point (default: 5).
 - DBSCAN does not require the number of clusters to be specified and can find arbitrarily shaped clusters.
 
 **Pipeline Steps:**
@@ -238,11 +246,14 @@ graph TD;
 
 **Mathematical Background:**
 - Z-score is a statistical measure that quantifies the number of standard deviations a data point is from the mean of the distribution.
-- For each feature, the Z-score for wallet \( i \) and feature \( j \) is:
-  \[
-  z_{ij} = \frac{x_{ij} - \mu_j}{\sigma_j + 1e-9}
-  \]
-  where \( x_{ij} \) is the scaled value, \( \mu_j \) is the mean, and \( \sigma_j \) is the standard deviation of feature \( j \).
+- For each feature, the Z-score for wallet i and feature j is:
+
+    z_ij = (x_ij - mu_j) / (sigma_j + 1e-9)
+
+    Where:
+    - x_ij = scaled value for wallet i, feature j
+    - mu_j = mean of feature j
+    - sigma_j = standard deviation of feature j
 
 **Pipeline Steps:**
 1. **Feature Engineering & Scaling:**
@@ -291,11 +302,15 @@ graph TD;
 
 **Mathematical Background:**
 - Mahalanobis distance measures the distance between a point and a distribution, taking into account the correlations of the data set.
-- For a wallet feature vector \( x \), the mean vector \( \mu \), and the covariance matrix \( S \), the Mahalanobis distance is:
-  \[
-  D_M(x) = \sqrt{(x - \mu)^T S^{-1} (x - \mu)}
-  \]
-- This distance is higher for points that are far from the mean, considering the feature covariance structure.
+- For a wallet feature vector x, the mean vector mu, and the covariance matrix S, the Mahalanobis distance is:
+
+    D_M(x) = sqrt( (x - mu)^T * S^{-1} * (x - mu) )
+
+    Where:
+    - x = feature vector for a wallet
+    - mu = mean vector of all wallets
+    - S = covariance matrix of all wallets
+    - S^{-1} = pseudo-inverse of S
 
 **Pipeline Steps:**
 1. **Feature Engineering & Scaling:**
